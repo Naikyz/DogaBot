@@ -5,7 +5,6 @@ const axios = require("axios");
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-var cron = require("cron");
 i = 0;
 
 async function getInfo() {
@@ -24,11 +23,16 @@ async function getInfo() {
 	//   console.log(response.data.data.fa[0].floor_price)
 	  return (response.data.data.fa[0].floor_price.toString());
 }
-
 // Login to Discord with your client's token
 client.login(token);
-setInterval(() => {
+
+client.on('ready', () => {
 	getInfo().then(function infos (result) {
 		client.user.setActivity("Floor Price: " + result.slice(0, 3) + "," + result.slice(3, 5) + "ꜩ");
 	});
-}, 120000);
+	setInterval(() => {
+		getInfo().then(function infos (result) {
+			client.user.setActivity("Floor Price: " + result.slice(0, 3) + "," + result.slice(3, 5) + "ꜩ");
+		});
+	}, 120000);
+})
