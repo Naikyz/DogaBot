@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+    dogami_bot:
+        container_name: dogami_bot
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        environment:
+            - TOKEN= #INSERT YOUR TOKEN
