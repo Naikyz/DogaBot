@@ -61,13 +61,16 @@ client.on('ready', async () => {
     Requests.getFloorPrice().then(function infos(result) {
         client.user.setActivity("Floor Price: " + result.slice(0, 3) + "," + result.slice(3, 5) + "ꜩ");
     });
-    createDogamiInfoChannels(client)
     setInterval(() => {
         Requests.getFloorPrice().then(function infos(result) {
             client.user.setActivity("Floor Price: " + result.slice(0, 3) + "," + result.slice(3, 5) + "ꜩ");
         });
-        createDogamiInfoChannels(client)
     }, 60000);
+
+    createDogamiInfoChannels(client)
+    setInterval(() => {
+        createDogamiInfoChannels(client)
+    }, 310000);
 })
 
 client.login(TOKEN);
