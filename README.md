@@ -21,8 +21,9 @@ git@github.com:Naikyz/DogaBot.git
 ## :checkered_flag: Quick-Start
 
 ```shell
-# Set your Discord Bot token in docker-compose.yml
-docker-compose up --build
+# Set your Discord Bot token in Dockerfile
+docker build -t dogabot .
+docker run dogabot
 ```
 
 ## Authors
