@@ -1,4 +1,5 @@
 FROM node:16.10.0-alpine
+ENV TOKEN= #TOKEN
 
 WORKDIR /app
 
