@@ -9,7 +9,7 @@ DATABASE = {}
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 async function getUpdateData(client) {
-    const channelsToFollow = ["📦 Price:", "🐕 Price:", "📊 Volume:"]
+    const channelsToFollow = ["📦 Alpha 1:", "📦 Alpha 2:", "🐕 Alpha 1:", "🐕 Alpha 2:", "📊 Volume:", "👕 GAP:"]
     client.guilds.cache.forEach((guild, key, map) => { // For each Guild
         if (!DATABASE[guild.id])
             DATABASE[guild.id] = {}
@@ -38,14 +38,20 @@ async function getUpdateData(client) {
 
 async function createDogamiInfoChannels(client) {
     await getUpdateData(client)
-    let boxFloor = await Requests.getBoxFloor()
-    let dogFloor = await Requests.getDogFloor()
+    let boxAlphaOneFloor = await Requests.getBoxAlphaOneFloor()
+    let boxAlphaTwoFloor = await Requests.getBoxAlphaTwoFloor()
+    let dogAlphaOneFloor = await Requests.getDogAlphaOneFloor()
+    let dogAlphaTwoFloor = await Requests.getDogAlphaTwoFloor()
     let volume = await Requests.getTodaysVolume()
-    const channelsToFollow = ["📦 Price:", "🐕 Price:", "📊 Volume:"]
+    let gapFloor = await Requests.getDogamiGapFloorPrice()
+    const channelsToFollow = ["📦 Alpha 1:", "📦 Alpha 2:", "🐕 Alpha 1:", "🐕 Alpha 2:", "📊 Volume:", "👕 GAP:"]
     const channelsToFollowNames = [
-        "📦 Price: " + (Math.round(boxFloor * 100) / 100).toFixed(2) + "ꜩ",
-        "🐕 Price: " + (Math.round(dogFloor * 100) / 100).toFixed(2) + "ꜩ",
-        "📊 Volume: " + volume
+        "📦 Alpha 1: " + (Math.round(boxAlphaOneFloor * 100) / 100).toFixed(2) + "ꜩ",
+        "📦 Alpha 2: " + (Math.round(boxAlphaTwoFloor * 100) / 100).toFixed(2) + "ꜩ",
+        "🐕 Alpha 1: " + (Math.round(dogAlphaOneFloor * 100) / 100).toFixed(2) + "ꜩ",
+        "🐕 Alpha 2: " + (Math.round(dogAlphaTwoFloor * 100) / 100).toFixed(2) + "ꜩ",
+        "📊 Volume: " + volume,
+        "👕 GAP: " + (Math.round(gapFloor * 100) / 100).toFixed(2) + "ꜩ"
     ]
     client.guilds.cache.forEach((guild) => {
         channelsToFollow.forEach(async (value, key) => {
@@ -58,14 +64,14 @@ async function createDogamiInfoChannels(client) {
 
 client.on('ready', async () => {
     console.log("Ready")
-    Requests.getFloorPrice().then(function infos(result) {
+    Requests.getDogamiFloorPrice().then(function infos(result) {
         client.user.setActivity("Floor Price: " + result.slice(0, 3) + "," + result.slice(3, 5) + "ꜩ");
     });
     setInterval(() => {
-        Requests.getFloorPrice().then(function infos(result) {
+        Requests.getDogamiFloorPrice().then(function infos(result) {
             client.user.setActivity("Floor Price: " + result.slice(0, 3) + "," + result.slice(3, 5) + "ꜩ");
         });
-    }, 60000);
+    }, 120000);
 
     createDogamiInfoChannels(client)
     setInterval(() => {
