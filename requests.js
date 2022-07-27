@@ -30,7 +30,7 @@ async function getDogamiGapFloorPrice() {
             }
         }`
     const response = await axiosRequest(query)
-    return (response.data.data.fa[0].floor_price.toString());
+    return (response.data.data.fa[0].floor_price / 1000000);
 }
 
 async function getBoxAlphaOneFloor() {
