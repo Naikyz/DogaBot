@@ -28,6 +28,6 @@ docker run dogabot
 
 ## Authors
 
-| [<img src="https://github.com/Naikyz.png?size=85" width=85><br><sub>Kylian PAULIN (the best)</sub>](https://github.com/Naikyz) | [<img src="https://github.com/MrSIooth.png?size=85" width=85><br><sub>Victor GUYOT</sub>](https://github.com/MrSIooth)
+| [<img src="https://github.com/Naikyz.png?size=85" width=85><br><sub>Kylian PAULIN</sub>](https://github.com/Naikyz) | [<img src="https://github.com/MrSIooth.png?size=85" width=85><br><sub>Victor GUYOT</sub>](https://github.com/MrSIooth)
 | :---: | :---: |
 <h2 align=center>
